@@ -18,14 +18,15 @@ export default class UsersController {
         schema: newUserSchema,
       })
       const newUser = await User.create(result)
-      response.status(201)
-      return newUser
+      return response.status(201).json({ newUser })
     } catch (error) {
       response.badRequest('Não foi possível cadastrar: Senha, ou email inválidos')
     }
   }
 
-  public async login({ request, response }: HttpContextContract) {
+  public async login({ request, response, auth }: HttpContextContract) {
+    const { email, password } = request.all()
+
     const userSchema = schema.create({
       email: schema.string({}, [rules.email(), rules.required()]),
       password: schema.string({}, [rules.required(), rules.minLength(9)]),
@@ -35,12 +36,7 @@ export default class UsersController {
       schema: userSchema,
     })
 
-    const { email } = request.body()
-    const result = await User.findBy('email', email)
-    if (result === null) {
-      return response.badRequest('Usuário não cadastrado')
-    }
-    response.status(200)
-    return result
+    const token = await auth.use('api').attempt(email, password)
+    return response.status(200).json(token)
   }
 }
