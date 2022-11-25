@@ -24,4 +24,7 @@ Route.group(() => {
   Route.get('/', async () => {
     return { hello: 'world' }
   })
+
+  Route.post('/signup', 'UsersController.register')
+  Route.post('/login', 'UsersController.login')
 })
