@@ -9,10 +9,20 @@ export default class extends BaseSchema {
       table.integer('quantidade')
       table.float('preco_uni')
       table.float('preco_total')
-      table.timestamp('data_hora')
 
-      table.integer('produto_id').unsigned().references('produtos.id').onDelete('CASCADE')
-      table.integer('cliente_id').unsigned().references('clientes.id').onDelete('CASCADE')
+      table
+        .integer('produto_id')
+        .unsigned()
+        .references('id')
+        .inTable('produtos')
+        .onDelete('CASCADE')
+      table
+        .integer('cliente_id')
+        .unsigned()
+        .references('id')
+        .inTable('clientes')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

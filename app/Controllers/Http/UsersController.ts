@@ -13,14 +13,15 @@ export default class UsersController {
       password: schema.string({}, [rules.required(), rules.minLength(9)]),
     })
 
+    const result = await request.validate({
+      schema: newUserSchema,
+    })
+
     try {
-      const result = await request.validate({
-        schema: newUserSchema,
-      })
       const newUser = await User.create(result)
       return response.status(201).json({ newUser })
     } catch (error) {
-      response.badRequest('Não foi possível cadastrar: Senha, ou email inválidos')
+      return response.badRequest('Não foi possível cadastrar: Senha, ou email inválidos')
     }
   }
 
@@ -36,7 +37,11 @@ export default class UsersController {
       schema: userSchema,
     })
 
-    const token = await auth.use('api').attempt(email, password)
-    return response.status(200).json(token)
+    try {
+      const token = await auth.use('api').attempt(email, password)
+      return response.status(200).json(token)
+    } catch (error) {
+      return response.badRequest('usuário não cadastrado')
+    }
   }
 }
