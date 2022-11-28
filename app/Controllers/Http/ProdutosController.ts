@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
+import Database from '@ioc:Adonis/Lucid/Database'
 import Produto from 'App/Models/Produto'
 
 export default class ProdutosController {
@@ -23,6 +24,17 @@ export default class ProdutosController {
       return response.status(201).json(created)
     } catch (err) {
       return response.badRequest('Não foi possível inserir o produto')
+    }
+  }
+
+  public async index({ response }: HttpContextContract) {
+    try {
+      const [productsList] = await Database.rawQuery(
+        'SELECT nome, preco FROM produtos ORDER BY nome ASC'
+      )
+      return response.status(200).json(productsList)
+    } catch (error) {
+      return response.badRequest('Livros não encontrados')
     }
   }
 }
