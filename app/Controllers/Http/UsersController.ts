@@ -13,15 +13,21 @@ export default class UsersController {
       password: schema.string({}, [rules.required(), rules.minLength(9)]),
     })
 
-    const result = await request.validate({
-      schema: newUserSchema,
-    })
+    try {
+      await request.validate({
+        schema: newUserSchema,
+      })
+    } catch ({ messages: { errors } }) {
+      return { erro: errors[0].message }
+    }
 
     try {
-      const newUser = await User.create(result)
+      const newUser = await User.create(request.body())
       return response.status(201).json({ newUser })
     } catch (error) {
-      return response.badRequest('Não foi possível cadastrar: Senha, ou email inválidos')
+      return response.badRequest({
+        message: 'Não foi possível efetuar cadastro',
+      })
     }
   }
 
@@ -33,15 +39,20 @@ export default class UsersController {
       password: schema.string({}, [rules.required(), rules.minLength(9)]),
     })
 
-    await request.validate({
-      schema: userSchema,
-    })
+    try {
+      await request.validate({
+        schema: userSchema,
+      })
+    } catch ({ messages: { errors } }) {
+      return { erro: errors[0].message }
+    }
 
     try {
       const token = await auth.use('api').attempt(email, password)
+      // apenas usuários que tenham cadastro no banco de dados podem gerar Token.
       return response.status(200).json(token)
     } catch (error) {
-      return response.badRequest('usuário não cadastrado')
+      return response.badRequest({ message: 'usuário não cadastrado' })
     }
   }
 }

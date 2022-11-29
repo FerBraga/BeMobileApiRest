@@ -59,6 +59,7 @@
     "@adonisjs/core": "^5.9.0",
     "@adonisjs/lucid": "^18.3.0",
     "@adonisjs/repl": "^3.1.11",
+    "adonis-lucid-soft-deletes": "^1.4.3",
     "joi": "^17.7.0",
     "jsonwebtoken": "^8.5.1",
     "luxon": "^3.1.0",

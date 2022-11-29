@@ -11,7 +11,7 @@ export default class ClientesController {
       )
       return response.status(200).json(returned)
     } catch (error) {
-      return response.notFound('Não foi possível listar clientes')
+      return response.notFound({ message: 'Não foi possível listar clientes' })
     }
   }
 
@@ -27,20 +27,24 @@ export default class ClientesController {
     })
 
     try {
-      const result = await request.validate({
+      await request.validate({
         schema: newClietnSchema,
       })
-      const created = await Cliente.create(result)
+    } catch ({ messages: { errors } }) {
+      return { erro: errors[0].message }
+    }
+
+    try {
+      const created = await Cliente.create(request.body())
       return response.status(201).json(created)
     } catch (err) {
-      return response.badRequest('Campos inválidos ou cliente já cadastrado')
+      return response.badRequest({ message: 'Não foi possível efetuar cadastro de cliente' })
     }
   }
 
   public async show({ request, response }: HttpContextContract) {
     const { id } = request.params()
     try {
-      console.log(id, 'id aqui')
       const [returned] = await Database.rawQuery(
         'SELECT quantidade,preco_uni, preco_total, cliente_id, produto_id, YEAR(created_at) as ano,' +
           'MONTH(created_at) as mes FROM vendas WHERE cliente_id = ? ORDER BY ano DESC, mes DESC',
@@ -48,7 +52,7 @@ export default class ClientesController {
       )
       return response.status(200).json(returned)
     } catch (error) {
-      return response.notFound('Vendas do cliente não encontradas')
+      return response.notFound({ message: 'Vendas do cliente não encontradas' })
     }
   }
 
@@ -66,20 +70,26 @@ export default class ClientesController {
       ]),
     })
 
-    await request.validate({
-      schema: clientUpdatedSchema,
-    })
+    try {
+      await request.validate({
+        schema: clientUpdatedSchema,
+      })
+    } catch ({ messages: { errors } }) {
+      return { erro: errors[0].message }
+    }
 
     try {
       const userFound = await Cliente.find(id)
-      if (userFound) {
+      if (userFound?.nome && userFound?.cpf) {
         userFound.nome = nome
         userFound.cpf = cpf
+        await userFound?.save()
+        return response.status(200).json(userFound)
+      } else {
+        return response.badRequest({ message: 'Cliente não encontrado' })
       }
-      await userFound?.save()
-      return response.status(200).json(userFound)
     } catch (error) {
-      return response.notAcceptable('Não foi possível editar ')
+      return response.notAcceptable({ message: 'Não foi possível editar ' })
     }
   }
 
@@ -91,7 +101,7 @@ export default class ClientesController {
       if (clientFound) await clientFound.delete()
       return response.status(200).json({ message: 'cliente deletado com sucesso' })
     } catch (error) {
-      return response.methodNotAllowed('Não foi possível deletar o cliente')
+      return response.methodNotAllowed({ message: 'Não foi possível deletar o cliente' })
     }
   }
 }

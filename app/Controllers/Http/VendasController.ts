@@ -12,15 +12,19 @@ export default class VendasController {
       preco_total: schema.number(),
     })
 
-    const result = await request.validate({
-      schema: newSaleSchema,
-    })
+    try {
+      await request.validate({
+        schema: newSaleSchema,
+      })
+    } catch ({ messages: { errors } }) {
+      return { erro: errors[0].message }
+    }
 
     try {
-      const created = await Venda.create(result)
+      const created = await Venda.create(request.body())
       return response.status(201).json(created)
     } catch (err) {
-      return response.badRequest('Não foi possível inserir a venda')
+      return response.badRequest({ message: 'Não foi possível inserir a venda' })
     }
   }
 }
