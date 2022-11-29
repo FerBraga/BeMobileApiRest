@@ -43,8 +43,10 @@ do seu usuário do servidor MySql.
 
 > Banco de dados
 ```bash
-Após instalar back-end você poderá utilizar o arquivo `docker-compose.yml`(caso você tenha Dokcer e Docker compose em sua máquina)  basta rodar o comando `docker-compose up` na pasta raíz, ou utilizar seu servidor mysql local. Certifique-se de não estar utilizando a `porta 3306`, pois ela será 
-utilizada para rodar o servidor MySql.
+Após instalar back-end você poderá utilizar o arquivo `docker-compose.yml`
+(caso você tenha Dokcer e Docker compose em sua máquina)  basta rodar o comando `docker-compose up` 
+na pasta raíz, ou utilizar seu servidor mysql local. Certifique-se de não estar utilizando a `porta 3306`, 
+pois ela será utilizada para rodar o servidor MySql.
 ``` 
 ## Executando aplicação
 
