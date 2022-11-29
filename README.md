@@ -23,8 +23,6 @@ Estando tudo certo com os dados da requisição, se faz uma chamada da camada mo
 de dados e recupera os dados requeridos retornando para o controller que passa para o cliente com o status
 adequado e o corpo com o conteúdo dos dados. 
 
-A última camada, model, faz a requisição/query com os dados vindo de service, caso tenham, para o banco de 
-dados relacional MySql utilizando a lib mysql2/promise, e retorna para as camadas anteriores usa resposta.
 ``` 
 
 > Banco de dados
@@ -45,9 +43,8 @@ do seu usuário do servidor MySql.
 
 > Banco de dados
 ```bash
-Após instalar back-end você poderá utilizar o arquivo `docker-compose.yml` basta rodar o comando `docker-compose up` 
-na pasta raíz, ou utilizar seu servidor local. Certifique-se de não estar utilizando a `porta 3306`, pois ela será 
-utilzada para rodar o servidor MySql.
+Após instalar back-end você poderá utilizar o arquivo `docker-compose.yml`(caso você tenha Dokcer e Docker compose em sua máquina)  basta rodar o comando `docker-compose up` na pasta raíz, ou utilizar seu servidor mysql local. Certifique-se de não estar utilizando a `porta 3306`, pois ela será 
+utilizada para rodar o servidor MySql.
 ``` 
 ## Executando aplicação
 
