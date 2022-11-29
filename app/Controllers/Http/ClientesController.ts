@@ -45,11 +45,9 @@ export default class ClientesController {
   public async show({ request, response }: HttpContextContract) {
     const { id } = request.params()
     try {
-      const [returned] = await Database.rawQuery(
-        'SELECT quantidade,preco_uni, preco_total, cliente_id, produto_id, YEAR(created_at) as ano,' +
-          'MONTH(created_at) as mes FROM vendas WHERE cliente_id = ? ORDER BY ano DESC, mes DESC',
-        [id]
-      )
+      const [returned] = await Cliente.query().preload('vendas', (vendasQuery) => {
+        vendasQuery.where('cliente_id', id).orderBy('vendas.created_at', 'desc')
+      })
       return response.status(200).json(returned)
     } catch (error) {
       return response.notFound({ message: 'Vendas do cliente não encontradas' })

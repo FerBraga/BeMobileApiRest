@@ -1,11 +1,9 @@
 import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
-import { compose } from '@ioc:Adonis/Core/Helpers'
-import { SoftDeletes } from '@ioc:Adonis/Addons/LucidSoftDeletes'
 import Produto from './Produto'
 import Cliente from './Cliente'
 
-export default class Venda extends compose(BaseModel, SoftDeletes) {
+export default class Venda extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
@@ -23,9 +21,6 @@ export default class Venda extends compose(BaseModel, SoftDeletes) {
 
   @column()
   public preco_total: number
-
-  @column.dateTime({ columnName: 'deletedAt' })
-  public deletedAt?: DateTime | null
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

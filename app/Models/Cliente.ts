@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, HasMany, hasMany, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import Venda from './Venda'
+import Telefone from './Telefone'
+import Endereco from './Endereco'
 
 export default class Cliente extends BaseModel {
   @column({ isPrimary: true })
@@ -22,4 +24,14 @@ export default class Cliente extends BaseModel {
     foreignKey: 'cliente_id',
   })
   public vendas: HasMany<typeof Venda>
+
+  @hasOne(() => Telefone, {
+    foreignKey: 'cliente_id',
+  })
+  public telefone: HasOne<typeof Telefone>
+
+  @hasOne(() => Endereco, {
+    foreignKey: 'cliente_id',
+  })
+  public endereco: HasOne<typeof Endereco>
 }
