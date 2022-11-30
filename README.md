@@ -77,17 +77,16 @@ pois ela será utilizada para rodar o servidor MySql.
  
  <img src="./images/addNovoCliente.png">
  
+   * Rota de listagem de cliente único e suas vendas por 'id', trazendo vendas mais recentes primeiro (GET - /clients/:id). ID e Token no campo Authorization obrigatório. Exemplo:
+ 
+  <img src="./images/listaClienteÙnico.png">
+ 
  
   * Rota de listagem de clientes ordenados por ID (GET - /clients). Token no campo Authorization obrigatório. Exemplo:
   
   <img src="./images/listaTodosClientes.png">
  
- 
-  * Rota de listagem de cliente único e suas vendas por 'id', trazendo vendas mais recentes primeiro (GET - /clients/:id). ID e Token no campo Authorization obrigatório. Exemplo:
- 
-  <img src="./images/listaClienteÙnico.png">
- 
-
+  
  * Rota atualiza cliente único e por 'id' (PATCH - /clients/:id). ID e campos para atualização e Token no campo Authorization obrigatórios. Exemplo:
  
   <img src="./images/atualizaCliente.png">
