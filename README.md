@@ -83,7 +83,7 @@ pois ela será utilizada para rodar o servidor MySql.
   <img src="./images/listaTodosClientes.png">
  
  
-  * Rota de listagem de cliente único e suas vendas por 'id' (GET - /clients/:id). ID e Token no campo Authorization obrigatório. Exemplo:
+  * Rota de listagem de cliente único e suas vendas por 'id', trazendo vendas mais recentes primeiro (GET - /clients/:id). ID e Token no campo Authorization obrigatório. Exemplo:
  
   <img src="./images/listaClienteÙnico.png">
  
