@@ -1,7 +1,7 @@
 # API Restful. 
 
 # Contexto
-Este projeto trata-se de uma simples API Restful que recebe requisições HTTP e realiza inserções, 
+Este projeto trata-se de uma simples API Restful onde o cliente pode realizar inserções, 
 remoções, atualizações e exclusão de registros no banco de dados MySql.
 
 
@@ -60,4 +60,66 @@ pois ela será utilizada para rodar o servidor MySql.
 
   ```
   Acesse a pasta raíz do projeto e rode `node ace migration:fresh`.
-  ```
+  
+  
+ ## Rotas 
+ 
+ * Rota de registro (POST - /signup). Campos email e password obrigatórios. Exemplo:
+ 
+ <img src="./images/registroUser.png">
+
+ * Rota de login (POST - /login). Campos email e password obrigatórios. Exemplo:
+ 
+  <img src="./images/loginUser.png">
+ 
+ 
+ * Rota de registro de novo cliente (POST - /clients). Campos nome e cpf obrigatórios e token obrigatório. Exemplo:
+ 
+ <img src="./images/addNovoCliente.png">
+ 
+ 
+  * Rota de listagem de clientes ordenados por ID (GET - /clients). Token no campo Authorization obrigatório. Exemplo:
+  
+  <img src="./images/listaTodosClientes.png">
+ 
+ 
+  * Rota de listagem de cliente único e suas vendas por 'id' (GET - /clients/:id). ID e Token no campo Authorization obrigatório. Exemplo:
+ 
+  <img src="./images/listaClienteÙnico.png">
+ 
+
+ * Rota atualiza cliente único e por 'id' (PATCH - /clients/:id). ID e campos para atualização e Token no campo Authorization obrigatórios. Exemplo:
+ 
+  <img src="./images/atualizaCliente.png">
+ 
+ 
+ * Rota deleta cliente único e por 'id' (DELETE - /clients/:id). ID e Token no campo Authorization obrigatório. Exemplo:
+ 
+  <img src="./images/deletaCliente.png">
+ 
+ 
+  * Rota adciona novo produto(livro) (POST - /products). Campos nome, auto, editora, preço e Token no campo Authorization obrigatórios. Exemplo:
+ 
+  <img src="./images/addUmProduto.png">
+ 
+ 
+ * Rota atualiza produto(livro) por id (PATCH - /products/:id). ID, campos que serão atualizados e Token no campo Authorization obrigatórios. Exemplo:
+ 
+  <img src="./images/atualizaProduto.png">
+ 
+ 
+  * Rota lista produto(livro) por id (GET - /products/:id).ID  e Token no campo Authorization obrigatórios. Exemplo:
+ 
+  <img src="./images/listaProdutoÙnico.png">
+ 
+ 
+  * Rota lista todos os produtos(livros) (GET - /products).Token no campo Authorization obrigatórios. Exemplo:
+ 
+  <img src="./images/listaProdutos.png">
+
+
+ * Rota de softdelete para produto(livro) por id (DELETE - /products/:id). ID e Token no campo Authorization obrigatórios. Exemplo:
+ 
+  <img src="./images/softDeleteProduto.png">
+  
+  
