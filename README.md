@@ -1,8 +1,8 @@
 # API Restful. 
 
 # Contexto
-Este projeto trata-se de uma simples API Restful onde o cliente pode realizar inserções, 
-remoções, atualizações e exclusão de registros no banco de dados MySql.
+Este projeto trata-se de uma simples API Restful onde o cliente pode registrar usuário, realizar login, cadastrar, 
+atualizar, listar e deletar  clientes, vendas e produtos no banco de dados MySql.
 
 
 ## Desenvolvimento 
@@ -27,7 +27,7 @@ adequado e o corpo com o conteúdo dos dados.
 
 > Banco de dados
 ```bash
-Feito com o banco de dados relacional MySql.O banco conterá com as tabelas de produtos, clientes, endereços, 
+Feito com o banco de dados relacional MySql.O banco contará com as tabelas de produtos, clientes, endereços, 
 usuários, produtos, vendas disponíveis. 
 ``` 
 
@@ -36,9 +36,9 @@ usuários, produtos, vendas disponíveis.
 > Backend
 ```bash
 Após clonar este repositório em seu diretório local, acesse a pasta onde foi clonado, 
-então rode o comando npm install para instalar todos os pacotes. de back-end. Dentro
-do diretório existe o arquivo `.env.example` com o modelo para registrar as credencias
-do seu usuário do servidor MySql.
+então rode o comando npm install para instalar todos os pacotes. de back-end. Crie um arquivo
+.env contendo suas credencias para acesso ao banco de dados e servidor. Dentro
+do diretório existe o arquivo `.env.example` que serve como exemplo.
 ``` 
 
 > Banco de dados
