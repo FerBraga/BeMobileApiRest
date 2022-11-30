@@ -83,13 +83,13 @@ export default class ProdutosController {
 
   public async delete({ params, response }: HttpContextContract) {
     //lógica para softdelete - marca o campo deleted_at com data e não retorna na rota de buscas
-    const softDeleted = await Database.rawQuery(
+    const [{ affectedRows }] = await Database.rawQuery(
       'UPDATE produtos SET deleted_at = now() WHERE id = ?',
       [params.id]
     )
-
-    if (softDeleted?.affectedRows)
+    if (affectedRows === 1) {
       return response.status(200).json({ message: 'Produto excluído com sucesso' })
+    }
 
     return response.methodNotAllowed({ message: 'Não foi possível excluir cliente' })
   }

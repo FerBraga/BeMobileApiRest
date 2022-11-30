@@ -1,0 +1,13 @@
+version: '3'
+services:
+  database: 
+    image:  mysql:8.0.29
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Fb97016949
+      MYSQL_HOST: localhost
+      MYSQL_USER: lucid
+      MYSQL_PASSWORD: Fb97016949
+      MYSQL_DATABASE: meuDB
+    ports:
+      - "3306:3306" 
